@@ -13,17 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('ekskuls', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('role');
-            $table->string('username')->unique();
-            $table->string('email')->unique();
-            $table->string('picture')->nullable();
-            $table->string('nimp')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('img');
+            $table->string('desc');
+            $table->foreignId('editor')
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('ekskuls');
     }
 };

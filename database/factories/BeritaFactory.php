@@ -34,7 +34,7 @@ class BeritaFactory extends Factory
             'slug' => $this->faker->slug,
             'excerp' => $this->faker->paragraph,
             'gambar' => 'dummy_gambar.jpg',
-            'user_id' => User::all()->random()->id, // Mengambil ID secara acak dari tabel Users
+            'user_id' => User::where('role',0)->get()->random()->id, // Mengambil ID secara acak dari tabel Users
             'created_at' => now(),
             'updated_at' => now(),
         ];
