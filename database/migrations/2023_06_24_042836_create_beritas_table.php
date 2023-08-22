@@ -15,12 +15,15 @@ return new class extends Migration
     {
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->text('isi');
+            $table->string('title');
+            $table->text('body');
             $table->string('slug')->unique();
             $table->text('excerp');
-            $table->string('gambar');
-            $table->foreignId('user_id');
+            $table->string('img');
+            $table->foreignId('editor')
+                ->constrained('users', 'id')
+                ->onDelete('restrict')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

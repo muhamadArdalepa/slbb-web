@@ -21,9 +21,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('picture')->nullable();
             $table->string('nimp')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('kelas_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $table->timestamps();
         });
     }

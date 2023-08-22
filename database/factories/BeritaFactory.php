@@ -29,14 +29,12 @@ class BeritaFactory extends Factory
             $teks .= $paragraf;
         }
         return [
-            'judul' => $this->faker->sentence,
-            'isi' => $teks,
+            'title' => $this->faker->sentence,
+            'body' => $teks,
             'slug' => $this->faker->slug,
             'excerp' => $this->faker->paragraph,
-            'gambar' => 'dummy_gambar.jpg',
-            'user_id' => User::where('role',0)->get()->random()->id, // Mengambil ID secara acak dari tabel Users
-            'created_at' => now(),
-            'updated_at' => now(),
+            'img' => 'berita_gambar/dummy.png',
+            'editor' => 1,
         ];
     }
 }

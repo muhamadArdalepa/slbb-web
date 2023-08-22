@@ -60,7 +60,6 @@
                             @endif
                         </li>
                     @endforeach
-
                 @endauth
                 @guest
                     <li class="nav-item ">
