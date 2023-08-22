@@ -3,7 +3,7 @@
 @section('content')
     <header class="bg-white p-5 mb-5">
         <div class="col-md-8 offset-md-2 p-5 my-5"
-            style="
+        style="
             border: solid 1px;
             border-top: none;
             border-bottom-width: 3px;

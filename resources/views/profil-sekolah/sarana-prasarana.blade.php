@@ -18,7 +18,7 @@
                 @foreach ($data as $d)
                 <div class="col-sm-6 col-md-4 mb-5">
                     <h3>{{$d->name}}</h3>
-                    <img src="{{$d->img}}" alt="Foto {{$d->name}}" class="img-fluid">
+                    <img src="{{asset('storage/'.$d->img)}}" alt="Foto {{$d->name}}" class="img-fluid rounded-4">
                 </div>
                 @endforeach
             </div>

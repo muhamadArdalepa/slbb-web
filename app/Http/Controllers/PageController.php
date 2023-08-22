@@ -5,27 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Ekskuls;
 use App\Models\Sarpras;
+use App\Models\Sejarah;
 use App\Models\Prestasi;
+use App\Models\VisiMisi;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    function profileSekolah($route)
+    function profilSekolah($route)
     {
         $data = [];
         switch ($route) {
+            case 'sejarah':
+                $data = Sejarah::select('users.name','sejarahs.*')->join('users','editor','=','users.id')->first();
+                break;
+            case 'visi-misi':
+                $data = VisiMisi::select('users.name','visi_misis.*')->join('users','editor','=','users.id')->first();
+                break;
             case 'sarana-prasarana':
                 $data = Sarpras::all();
                 break;
             case 'tenaga-pengajar':
                 $data = User::where('role',1)->get();
                 break;
-            
-            default:
-                # code...
-                break;
         }
-        return view('profile-sekolah.'.$route,compact('data'));
+        return view('profil-sekolah.'.$route,compact('data'));
     }
 
     function ekstrakurikuler()

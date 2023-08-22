@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $pages = [
             [
                 'name' => 'Profile Sekolah',
-                'route' => 'profile-sekolah',
+                'route' => 'profil-sekolah',
                 'is_auth' => 0,
             ],
             [
@@ -109,7 +109,7 @@ class DatabaseSeeder extends Seeder
             \App\Models\Sarpras::create([
                 'name' => fake()->word(),
                 'desc' => fake()->sentence(2),
-                'img' => 'https://dummyimage.com/4:3x1080/',
+                'img' => 'sarana-prasarana_gambar/dummy.png',
                 'editor' => 1,
             ]);
         }
@@ -124,5 +124,18 @@ class DatabaseSeeder extends Seeder
                 'editor' => 1,
             ]);
         }
+
+        \App\Models\Sejarah::create([
+            'title' => 'Sejarah SLB - B Dharma Asih',
+            'img' => 'sejarah_gambar/64e1c54974e29.JPG',
+            'body' => 'ini body sejarah',
+            'editor' => 1,
+        ]);
+        \App\Models\VisiMisi::create([
+            'img' => 'visi-misi_gambar/64e1c54974e29.JPG',
+            'visi' => 'ubah visi disini',
+            'misi' => 'ubah visi disini',
+            'editor' => 1,
+        ]);
     }
 }
