@@ -27,7 +27,7 @@ class AdminPageController extends Controller
                 $data = VisiMisi::select('users.name','visi_misis.*')->join('users','editor','=','users.id')->first();
                 break;
             case 'sarana-prasarana':
-                $data = Sarpras::all();
+                
                 break;
             case 'tenaga-pengajar':
                 $data = User::where('role',1)->get();

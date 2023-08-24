@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('img');
             $table->string('body');
             $table->foreignId('editor')
-                ->constrained('users')
+                ->constrained('users', 'id')
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
             $table->timestamps();

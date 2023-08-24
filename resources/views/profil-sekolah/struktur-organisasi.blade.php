@@ -1,29 +1,102 @@
 @extends('layouts.app')
 @push('css')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        .map {
+            height: 100vh;
+            width: 100%;
+            overflow: auto;
+            padding: 5rem 0;
+        }
+
+        .map img {
+            height: calc(100% * 2);
+        }
+    </style>
 @endpush
 @section('content')
     @include('layouts.breadcrumbs', [
         'pages' => [['name' => 'Profile Sekolah', 'route' => '#']],
-        'active' => 'Sarana Prasarana',
+        'active' => 'Struktur Organisasi',
     ])
     <section class="bg-white">
         <div class="container">
             <h1>Sarana dan Prasarana</h1>
-            <div id="map" class="vh-100"></div>
+            <small class="text-muted d-block">Diubah oleh {{$data->name}} pada {{\Carbon\Carbon::parse($data->updated_at)->translatedFormat('l, d F Y')}}</small>       
+            <div class="map-container">
+                <div class="drag-notification">Seret untuk menjelajahi</div>
+                <div class="map overflow-hidden py-5" id="mapContainer" style="cursor: grab;">
+                    <img src="{{ asset('storage/'.$data->img) }}"
+                        alt="struktur organisasi" class="vh100" draggable="false">
+                </div>
+            </div>
         </div>
     </section>
     @push('js')
         <script>
-            var map = L.map('map').setView([51.505, -0.09], 13);
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
+            var mapContainer = document.getElementById("mapContainer");
+            var isDragging = false;
+            var startCoords = {
+                x: 0,
+                y: 0
+            };
+
+            // Fungsi untuk menggulirkan peta ke tengah secara horizontal
+            function scrollToCenter() {
+                var middleOfMap = mapContainer.scrollWidth / 2 - mapContainer.clientWidth / 2;
+                mapContainer.scrollTo(middleOfMap, mapContainer.scrollTop);
+            }
+
+            // Fungsi untuk memulai menyeret
+            function startDragging(event) {
+                isDragging = true;
+                startCoords.x = event.clientX;
+                startCoords.y = event.clientY;
+                mapContainer.style.cursor = "grabbing";
+
+                // Sembunyikan pemberitahuan
+                var dragNotification = document.querySelector(".drag-notification");
+                dragNotification.style.display = "none";
+            }
+
+            // Fungsi untuk menghitung perpindahan dan menggulirkan saat menyeret
+            function dragMap(event) {
+                if (!isDragging) return;
+                var deltaX = startCoords.x - event.clientX;
+                var deltaY = startCoords.y - event.clientY;
+                startCoords.x = event.clientX;
+                startCoords.y = event.clientY;
+
+                mapContainer.scrollLeft += deltaX;
+                mapContainer.scrollTop += deltaY;
+            }
+
+            // Fungsi untuk berhenti menyeret
+            function stopDragging() {
+                isDragging = false;
+                mapContainer.style.cursor = "grab";
+
+                // Tampilkan kembali pemberitahuan setelah berhenti menyeret
+                var dragNotification = document.querySelector(".drag-notification");
+                dragNotification.style.display = "block";
+            }
+
+            // Event listener saat halaman selesai dimuat
+            document.addEventListener("DOMContentLoaded", function(event) {
+                scrollToCenter();
+
+                mapContainer.addEventListener("mousedown", startDragging);
+                mapContainer.addEventListener("mousemove", dragMap);
+                mapContainer.addEventListener("mouseup", stopDragging);
+                mapContainer.addEventListener("mouseleave", stopDragging);
+
+                mapContainer.addEventListener("touchstart", function(event) {
+                    startDragging(event.touches[0]);
+                });
+                mapContainer.addEventListener("touchmove", function(event) {
+                    dragMap(event.touches[0]);
+                });
+                mapContainer.addEventListener("touchend", stopDragging);
+            });
         </script>
     @endpush
 @endsection

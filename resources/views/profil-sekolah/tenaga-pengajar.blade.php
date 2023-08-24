@@ -4,11 +4,11 @@
 @section('content')
     @include('layouts.breadcrumbs', [
         'pages' => [['name' => 'Profile Sekolah', 'route' => '#']],
-        'active' => 'Guru dan Staff',
+        'active' => 'Tenaga Pengajar',
     ])
     <section class="bg-white">
         <div class="container">
-            <h1 class="mb-4">Guru dan Staff</h1>
+            <h1 class="mb-4">Tenaga Pengajar</h1>
             <div class="row justify-content-center">
                 @foreach ($data as $d)
                     <div class="col-sm-4 col-md-3 mb-5">

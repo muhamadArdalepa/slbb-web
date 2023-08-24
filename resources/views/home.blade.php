@@ -40,14 +40,14 @@
                 @php(\Carbon\Carbon::setLocale('id'))
                 @foreach ($berita as $b)
                     <div class="col-lg-4">
-                        <a class="text-decoration-none text-dark" href="{{ route('berita.show', $b->slug) }}">
+                        <a class="text-decoration-none text-dark" href="{{ env('APP_URL') . '/berita/' . $b->slug }}">
                             <div class="bg-white overflow-hidden">
                                 <div style=" max-height: 300px;" class="overflow-hidden">
-                                    <img src="{{ asset('storage/berita_gambar') . '/' . $b->gambar }}" alt="foto berita"
+                                    <img src="{{ asset('storage/') . '/' . $b->img }}" alt="foto berita"
                                         class="img-fluid rounded-4">
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="mt-3">{{ $b->judul }}</h5>
+                                    <h5 class="mt-3">{{ $b->title }}</h5>
                                     <small class="text-muted"><i class="fa-regular fa-calendar me-2"></i>
                                         {{ \Carbon\Carbon::parse($b->created_at)->translatedFormat('l, j F Y') }}</small>
                                     <p class="card-text">{{ $b->excerp }}</p>
@@ -58,7 +58,8 @@
                     </div>
                 @endforeach
             </div>
-            <a href="{{ route('berita') }}" class="btn btn-outline-warning text-dark border-2 ">Tampilkan semua berita</a>
+            <a href="{{ route('berita', 'terbaru') }}" class="btn btn-outline-warning text-dark border-2 ">Tampilkan semua
+                berita</a>
         </div>
     </section>
     <section class="bg-light py-4">
@@ -81,9 +82,11 @@
                     </div>
                 @endforeach
             </div>
-            <a href="{{ route('ekstrakurikuler') }}" class="btn btn-outline-warning text-dark border-2 ">Tampilkan semua ekstrakurikuler</a>
+            <a href="{{ route('ekstrakurikuler') }}" class="btn btn-outline-warning text-dark border-2 ">Tampilkan semua
+                ekstrakurikuler</a>
         </div>
     </section>
+    <div id="kontak"></div>
     <section class="bg-white py-4">
         <div class="container mb-5">
             <h2 class="mb-5 text-center">
@@ -101,23 +104,27 @@
                 <div class="col-md-6 ps-md-5">
                     <h3 class="mb-4">Kontak</h3>
                     <div class="d-flex gap-3 mb-4">
-                        <a href="mailto:" class="btn btn-light shadow-sm align-self-start btn-lg"><i class="fa-regular fa-envelope"></i></a>
+                        <a href="mailto:" class="btn btn-light shadow-sm align-self-start btn-lg"><i
+                                class="fa-regular fa-envelope"></i></a>
                         <div class="lh-sm py-1">
                             <div class="fw-bold">Email</div>
                             <div class="">slbbdharmaasih@gmail.com</div>
                         </div>
                     </div>
                     <div class="d-flex gap-3 mb-4">
-                        <a href="mailto:" class="btn btn-light shadow-sm align-self-start btn-lg"><i class="fa-solid fa-map-location-dot"></i></a>
+                        <a href="mailto:" class="btn btn-light shadow-sm align-self-start btn-lg"><i
+                                class="fa-solid fa-map-location-dot"></i></a>
                         <div class="lh-sm py-1">
                             <div class="fw-bold">Alamat</div>
-                            <div class="">Jl. Jenderal Ahmad Yani, Bangka Belitung Darat, 
-                                <br>Kec. Pontianak Tenggara, Kota Pontianak, 
-                                <br>Kalimantan Barat 78124</div>
+                            <div class="">Jl. Jenderal Ahmad Yani, Bangka Belitung Darat,
+                                <br>Kec. Pontianak Tenggara, Kota Pontianak,
+                                <br>Kalimantan Barat 78124
+                            </div>
                         </div>
                     </div>
                     <div class="d-flex gap-3">
-                        <a href="mailto:" class="btn btn-light shadow-sm align-self-start btn-lg"><i class="fa-solid fa-map-location-dot"></i></a>
+                        <a href="mailto:" class="btn btn-light shadow-sm align-self-start btn-lg"><i
+                                class="fa-solid fa-map-location-dot"></i></a>
                         <div class="lh-sm py-1">
                             <div class="fw-bold">Telepon</div>
                             <div class=""></div>

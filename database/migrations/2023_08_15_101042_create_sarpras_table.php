@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('img');
             $table->string('desc');
             $table->foreignId('editor')
-                ->nullable()
                 ->constrained('users', 'id')
-                ->onDelete('set null')
+                ->onDelete('restrict')
                 ->onUpdate('cascade');
             $table->timestamps();
         });

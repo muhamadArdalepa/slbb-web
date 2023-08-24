@@ -21,9 +21,8 @@ return new class extends Migration
             $table->string('year');
             $table->tinyInteger('type');
             $table->foreignId('editor')
-                ->nullable()
                 ->constrained('users', 'id')
-                ->onDelete('set null')
+                ->onDelete('restrict')
                 ->onUpdate('cascade');
             $table->timestamps();
         });

@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
 
             \App\Models\User::create([
                 'name' => $name,
-                'role' => random_int(0, 3),
+                'role' => random_int(2, 3),
                 'username' => strtolower($username . $number),
                 'email' => strtolower($username. $number) . '@gmail.com',
                 'picture' => 'profil_gambar/dummy.png',
@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
                 $number = random_int(0, 99);
                 \App\Models\User::create([
                     'name' => $fname . ' ' . $lname,
-                    'role' => random_int(0, 3),
+                    'role' => random_int(2, 3),
                     'username' => strtolower($fname . $lname . $number),
                     'email' => strtolower($fname . $lname . $number) . '@gmail.com',
                     'picture' => 'profil_gambar/dummy.png',
@@ -155,8 +155,14 @@ class DatabaseSeeder extends Seeder
                 'is_auth' => 0,
             ],
             [
+                'name' => 'Daftar Siswa',
+                'route' => 'siswa',
+                'parent_id' => 1,
+                'is_auth' => 1,
+            ],
+            [
                 'name' => 'Berita Terbaru',
-                'route' => 'berita',
+                'route' => 'terbaru',
                 'parent_id' => 2,
                 'is_auth' => 0,
             ],
@@ -211,6 +217,10 @@ class DatabaseSeeder extends Seeder
             'img' => 'visi-misi_gambar/dummy.png',
             'visi' => 'ubah visi disini',
             'misi' => 'ubah visi disini',
+            'editor' => 1,
+        ]);
+        \App\Models\StrukturOrganisasi::create([
+            'img' => 'struktur-organisasi_gambar/struktur-organisasi.png',
             'editor' => 1,
         ]);
     }

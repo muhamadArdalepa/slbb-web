@@ -18,23 +18,7 @@ class UpdatePages extends Controller
     {
         switch ($request->page) {
             case 'sejarah':
-                $validatedData = $request->validate([
-                    'title' => 'required',
-                    'body' => 'required',
-                    'img' => 'nullable|image|mimes:jpeg,png,jpg',
-                ],[
-                    'title.required' => 'Judul Wajib diisi',
-                    'body.required' => 'Body Wajib diisi',
-                ]);
-                $validatedData['editor'] = auth()->user()->id;
-                if ($request->hasFile('img') && $request->file('img')->isValid()) {
-                    $extension = $request->file('img')->getClientOriginalExtension();
-                    $bgImagePath = $request->file('img')->storeAs('public/sejarah_gambar', uniqid() . '.' . $extension);
-                    $bgImageFileName = basename($bgImagePath);
-                    $validatedData['img'] = 'sejarah_gambar/'.$bgImageFileName;
-                }
-                Sejarah::first()->update($validatedData);
-                return back()->with('success','Halaman sejarah berhasil diubah');
+                
                 break;
             case 'visi-misi':
                 $validatedData = $request->validate([

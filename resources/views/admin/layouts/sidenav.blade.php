@@ -10,43 +10,43 @@
     aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-body">
         <div class="accordion" style="width: 240px" id="accordionSidenav">
-            <a href="{{route('admin.home')}}"
+            <a href="{{ route('admin.dashboard') }}"
+                class="btn my-1 btn-{{ Route::currentRouteName() == 'admin.dashboard' ? 'warning' : 'light' }}  w-100 text-start">
+                Home
+            </a>
+            <a href="{{ route('admin.home') }}"
                 class="btn my-1 btn-{{ Route::currentRouteName() == 'admin.home' ? 'warning' : 'light' }}  w-100 text-start">
                 Home
             </a>
             @foreach (\App\Models\Nav::with('dropdown')->whereNull('parent_id')->get() as $i => $nav)
                 @if (count($nav->dropdown) > 0)
-                <div class="accordion-item my-1 bg-transparent border-0" id="heading-{{$i}}">
-                    <a href="#"
-                        class="btn my-1 btn-{{ Route::currentRouteName() == 'admin.'.$nav->route ? 'warning' : 'light' }} w-100 text-start d-flex"
-                        data-bs-toggle="collapse" data-bs-target="#collapse-{{$i}}" aria-expanded="true"
-                        aria-controls="collapse-{{$i}}">
-                        {{$nav->name}}
-                        <i class="fa-solid fa-chevron-down ms-auto align-self-center fa-2xs"></i>
-                    </a>
-                    <div id="collapse-{{$i}}"
-                        class="accordion-collapse ps-3 {{ Route::currentRouteName() == 'admin.'.$nav->route ? '' : 'collapse' }}"
-                        aria-labelledby="heading-{{$i}}"
-                        data-bs-parent="#accordionSidenav"
-                        >
-
-                        @foreach ($nav->dropdown as $dropdown)
-                        <a href="{{ route('admin.'.$nav->route, $dropdown->route) }}"
-                            class="btn btn-{{ request()->is('*'.$dropdown->route) ? 'secondary' : 'light' }} my-1 w-100 text-start">
-                            {{$dropdown->name}}
+                    <div class="accordion-item my-1 bg-transparent border-0" id="heading-{{ $i }}">
+                        <a href="#"
+                            class="btn my-1 btn-{{ request()->is('admin/' . $nav->route . '*') ? 'warning' : 'light' }} w-100 text-start d-flex"
+                            data-bs-toggle="collapse" data-bs-target="#collapse-{{ $i }}"
+                            aria-expanded="true" aria-controls="collapse-{{ $i }}">
+                            {{ $nav->name }}
+                            <i class="fa-solid fa-chevron-down ms-auto align-self-center fa-2xs"></i>
                         </a>
-                        @endforeach
+                        <div id="collapse-{{ $i }}"
+                            class="accordion-collapse ps-3 {{ request()->is('admin/' . $nav->route . '*') ? '' : 'collapse' }}"
+                            aria-labelledby="heading-{{ $i }}" data-bs-parent="#accordionSidenav">
 
+                            @foreach ($nav->dropdown as $dropdown)
+                                <a href="{{env('APP_URL'). '/admin/' . $nav->route.'/'. $dropdown->route }}"
+                                    class="btn btn-{{ request()->is('*' . $dropdown->route) ? 'secondary' : 'light' }} my-1 w-100 text-start">
+                                    {{ $dropdown->name }}
+                                </a>
+                            @endforeach
+
+                        </div>
                     </div>
-                </div>
                 @else
-                <a href="{{route('admin.'.$nav->route)}}"
-                    class="btn my-1 btn-{{ Route::currentRouteName() == 'admin.'.$nav->route ? 'warning' : 'light' }}  w-100 text-start">
-                    {{$nav->name}}
-                </a>
-
+                    <a href="{{ route('admin.' . $nav->route) }}"
+                        class="btn my-1 btn-{{ Route::currentRouteName() == 'admin.' . $nav->route ? 'warning' : 'light' }}  w-100 text-start">
+                        {{ $nav->name }}
+                    </a>
                 @endif
-               
             @endforeach
 
 
