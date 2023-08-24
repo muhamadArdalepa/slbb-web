@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->enum('jenjang',['sdlb','smplb','smalb']);
             $table->timestamps();
         });

@@ -3,16 +3,19 @@
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UpdatePages;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KegiatanSiswa;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\SejarahController;
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KegiatanSiswaController;
 use App\Http\Controllers\ProfilSekolahController;
-use App\Http\Controllers\SaranaPrasaranaController;
-use App\Http\Controllers\SejarahController;
-use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\TenagaPengajarController;
+use App\Http\Controllers\SaranaPrasaranaController;
+use App\Http\Controllers\StrukturOrganisasiController;
 
 // auth
 Auth::routes(['except' => [
@@ -32,6 +35,7 @@ Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
 
 // auth
 Route::get('/kegiatan-siswa', [PageController::class, 'kegiatanSiswa'])->name('kegiatan-siswa');
+Route::resource('kegiatan-siswa', KegiatanSiswaController::class)->except(['index']);
 
 
 Route::middleware(['auth','auth.admin'])->group(function () {
@@ -46,8 +50,8 @@ Route::middleware(['auth','auth.admin'])->group(function () {
         Route::resource('/profil-sekolah/sarana-prasarana', SaranaPrasaranaController::class);
         Route::resource('/profil-sekolah/struktur-organisasi', StrukturOrganisasiController::class);
         Route::resource('/profil-sekolah/tenaga-pengajar', TenagaPengajarController::class);
-        
-        Route::resource('/berita', BeritaController::class);
+        Route::resource('/berita/terbaru', BeritaController::class);
+        Route::resource('/berita/galeri', GaleriController::class);
 
         
         Route::prefix('berita')->group(function () {

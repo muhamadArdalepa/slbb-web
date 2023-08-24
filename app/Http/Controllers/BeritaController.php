@@ -17,7 +17,7 @@ class BeritaController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Berita::with('user');
+        $query = Berita::with('user')->latest();
         if ($request->has('terms')) {
             $query->where('title', 'LIKE', '%' . $request->terms . '%');
         }
@@ -46,10 +46,11 @@ class BeritaController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg',
+            'img' => 'required|image|mimes:jpeg,png,jpg',
         ], [
             'title.required' => 'Judul Wajib diisi',
             'body.required' => 'Body Wajib diisi',
+            'img.required' => 'Gambar Wajib diisi',
         ]);
         $validatedData['editor'] = auth()->user()->id;
         $strippedBody = strip_tags($validatedData['body']);
@@ -62,7 +63,7 @@ class BeritaController extends Controller
             $validatedData['img'] = 'berita/' . $bgImageFileName;
         }
         Berita::create($validatedData);
-        return redirect(route('berita.index'))->with('success', 'Berita berhasil ditambah diubah');
+        return redirect(route('terbaru.index'))->with('success', 'Berita berhasil ditambah');
     }
 
     /**

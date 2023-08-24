@@ -13,7 +13,9 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ route('berita.create') }}" class="btn btn-primary ms-3">Tambah Berita</a>
+            @if (request()->is('admin*'))
+                <a href="{{ route('terbaru.create') }}" class="btn btn-primary ms-3">Tambah Berita</a>
+            @endif
         </div>
         @if (session()->has('success'))
             <div class="alert alert-success" role="alert">
@@ -32,21 +34,42 @@
                 @foreach ($data as $b)
                     <div class="col-md-6">
                         <div class="card mb-4 overflow-hidden">
-                            <a class="text-decoration-none text-dark" href="{{ env('APP_URL') . '/berita/' . $b->slug }}">
-                                <div class="d-flex align-items-center mb-4 overflow-hidden" style="max-height: 300px">
-                                    <img src="{{ asset('storage/' . $b->img) }}" class="img-fluid" />
+                            @if (!request()->is('admin*'))
+                                <a class="text-decoration-none text-dark"
+                                    href="{{ env('APP_URL') . '/berita/' . $b->slug }}">
+                            @endif
+                            <div class="d-flex align-items-center mb-4 overflow-hidden" style="max-height: 300px">
+                                <img src="{{ asset('storage/' . $b->img) }}" class="img-fluid" />
+                            </div>
+                            <div class="card-body">
+                            @if (request()->is('admin*'))
+                                <div class="d-flex">
+                                    <div class="">
+                            @endif
+                                        <h5 class="card-title">{{ $b->title }}</h5>
+                                        <p class="card-text">{{ $b->excerp }}. . .</p>
+                                        <p class="card-text">
+                                            <small class="text-muted">
+                                                {{ $b->updated_at->diffForHumans() }} | oleh
+                                                {{ $b->user->name }}
+                                            </small>
+                                        </p>
+
+                            @if (request()->is('admin*'))
+                                    </div>
+                                    <div class="flex-shrink-0 ms-auto align-self-end">
+                                        <a href="" class="btn btn-primary">Ubah</a>
+                                        <button class="btn btn-danger">
+                                            <i class="fas fa-xmark"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $b->title }}</h5>
-                                    <p class="card-text">{{ $b->excerp }}. . .</p>
-                                    <p class="card-text">
-                                        <small class="text-muted">
-                                            {{ $b->updated_at->diffForHumans() }} | oleh
-                                            {{ $b->user->name }}
-                                        </small>
-                                    </p>
-                                </div>
-                            </a>
+                            @endif
+                            </div>
+                            @if (!request()->is('admin*'))
+                                </a>
+                            @endif
+
                         </div>
                     </div>
                 @endforeach

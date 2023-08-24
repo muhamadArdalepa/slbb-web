@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3>{{$data? 'Ubah' : 'Tambah'}} Berita {{$data? $data->title : ''}}</h3>
-                        <form method="post" action="{{ route('berita.'.($data?'update':'store'),$data?$data->id:'') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('terbaru.'.($data?'update':'store'),$data?$data->id:'') }}" enctype="multipart/form-data">
                             @method($data?'PUT':'POST')
                             @csrf
                             <div class="form-group mb-3">

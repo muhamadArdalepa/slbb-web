@@ -5,7 +5,14 @@
     <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#headerCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></button>
+                aria-label="Slide 1">
+            </button>
+            @foreach ($galeri as $i => $g)
+                <button type="button" data-bs-target="#headerCarousel" data-bs-slide-to="{{ $i + 1 }}"
+                    aria-label="Slide {{ $i + 1 }}">
+                </button>
+            @endforeach
+
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -18,12 +25,26 @@
                     <p>Some representative placeholder content for the first slide.</p>
                 </div>
             </div>
+
+            @foreach ($galeri as $g)
+                <div class="carousel-item">
+                    <div class="vh-100">
+                        <img src="{{ asset('storage/' . $g->img) }}" alt="" class="img-fluid">
+                        <div class="vh-100 w-100 position-absolute top-0 bg-gradient-reflect"></div>
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{$g->title}}</h5>
+                        <p>{{$g->desc}}</p>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
+
         <button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>

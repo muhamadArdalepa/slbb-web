@@ -53,10 +53,10 @@ class DatabaseSeeder extends Seeder
             $number = random_int(0, 99);
             $pos = strpos($name, ".");
 
-            if ($pos !== false) {       
-                $username = substr($name, 0, $pos-1);
+            if ($pos !== false) {
+                $username = substr($name, 0, $pos - 1);
                 $username = str_replace(" ", "", $username);
-            }else{
+            } else {
                 $username = str_replace(" ", "", $name);
             }
 
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
                 'name' => $name,
                 'role' => random_int(2, 3),
                 'username' => strtolower($username . $number),
-                'email' => strtolower($username. $number) . '@gmail.com',
+                'email' => strtolower($username . $number) . '@gmail.com',
                 'picture' => 'profil_gambar/dummy.png',
                 'nimp' => fake()->numerify('################'),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -223,5 +223,13 @@ class DatabaseSeeder extends Seeder
             'img' => 'struktur-organisasi_gambar/struktur-organisasi.png',
             'editor' => 1,
         ]);
+        for ($i = 0; $i < 15; $i++) {
+            \App\Models\Galeri::create([
+                'title' => fake()->words(5,true),
+                'desc' => fake()->sentence(10),
+                'img' => 'galeri/dummy.png',
+                'editor' => 1,
+            ]);
+        }
     }
 }
