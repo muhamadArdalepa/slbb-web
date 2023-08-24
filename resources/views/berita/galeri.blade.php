@@ -19,10 +19,10 @@
         $(document).ready(() => {
 
             $('.galeri-container').append(
-                `<div style="height:200px" id="row${row}" class="d-inline-flex gap-2 row-container"></div>`)
+                `<div style="height:500px" id="row${row}" class="d-inline-flex gap-2 row-container"></div>`)
             galeri.forEach(e => {
                 if ($('#row' + row)[0].offsetWidth >= $('.galeri-container')[0].offsetWidth) {
-                    $('.galeri-container').append(`<div style="height:200px" id="row` + (++row) +
+                    $('.galeri-container').append(`<div style="height:500px" id="row` + (++row) +
                         `" class="d-inline-flex gap-2 row-container"></div>`)
                 }
                 $('#row' + row).append(`<img style="height:100%" src="${baseUrl}/storage/${e.img}">`)
@@ -30,7 +30,7 @@
             });
 
             $('.row-container').each(i => {
-                var fitHeight = Math.round($('.galeri-container')[0].offsetWidth) * 200 / Math.round($('.row-container')[i].offsetWidth)
+                var fitHeight = $('.galeri-container')[0].offsetWidth * 500 / $('.row-container')[i].offsetWidth
                 $($('.row-container')[i]).css('height', fitHeight + 'px')
                 console.log($('.row-container')[i].offsetWidth)
             })

@@ -33,9 +33,9 @@ class UpdatePages extends Controller
                 $validatedData['editor'] = auth()->user()->id;
                 if ($request->hasFile('img') && $request->file('img')->isValid()) {
                     $extension = $request->file('img')->getClientOriginalExtension();
-                    $bgImagePath = $request->file('img')->storeAs('public/visi-misi_gambar', uniqid() . '.' . $extension);
+                    $bgImagePath = $request->file('img')->storeAs('public/visi-misi', uniqid() . '.' . $extension);
                     $bgImageFileName = basename($bgImagePath);
-                    $validatedData['img'] = 'visi-misi_gambar/'.$bgImageFileName;
+                    $validatedData['img'] = 'visi-misi/'.$bgImageFileName;
                 }
                 VisiMisi::first()->update($validatedData);
                 return back()->with('success','Halaman visi dan misi berhasil diubah');

@@ -47,9 +47,9 @@ class SaranaPrasaranaController extends Controller
         $validatedData['editor'] = auth()->user()->id;
         if ($request->hasFile('img') && $request->file('img')->isValid()) {
             $extension = $request->file('img')->getClientOriginalExtension();
-            $bgImagePath = $request->file('img')->storeAs('public/sarana-prasarana_gambar', uniqid() . '.' . $extension);
+            $bgImagePath = $request->file('img')->storeAs('public/sarana-prasarana', uniqid() . '.' . $extension);
             $bgImageFileName = basename($bgImagePath);
-            $validatedData['img'] = 'sarana-prasarana_gambar/'.$bgImageFileName;
+            $validatedData['img'] = 'sarana-prasarana/'.$bgImageFileName;
         }
         Sarpras::create($validatedData);
         return redirect(route('sarana-prasarana.index'))->with('success','Sarana prasana berhasil ditambah');
@@ -97,9 +97,9 @@ class SaranaPrasaranaController extends Controller
         $validatedData['editor'] = auth()->user()->id;
         if ($request->hasFile('img') && $request->file('img')->isValid()) {
             $extension = $request->file('img')->getClientOriginalExtension();
-            $bgImagePath = $request->file('img')->storeAs('public/sarana-prasarana_gambar', uniqid() . '.' . $extension);
+            $bgImagePath = $request->file('img')->storeAs('public/sarana-prasarana', uniqid() . '.' . $extension);
             $bgImageFileName = basename($bgImagePath);
-            $validatedData['img'] = 'sarana-prasarana_gambar/'.$bgImageFileName;
+            $validatedData['img'] = 'sarana-prasarana/'.$bgImageFileName;
         }
         Sarpras::findOrFail($id)->update($validatedData);
         return redirect(route('sarana-prasarana.index'))->with('success','Data sarana prasana berhasil diubah');

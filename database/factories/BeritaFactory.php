@@ -33,7 +33,7 @@ class BeritaFactory extends Factory
             'body' => $teks,
             'slug' => $this->faker->slug,
             'excerp' => $this->faker->paragraph,
-            'img' => 'berita_gambar/dummy.png',
+            'img' => 'dummy.png',
             'editor' => 1,
         ];
     }

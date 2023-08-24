@@ -2,7 +2,7 @@
 @push('css')
 @endpush
 @section('content')
-    <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+    <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#headerCarousel" data-bs-slide-to="0" class="active" aria-current="true"
                 aria-label="Slide 1">
@@ -16,13 +16,13 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="vh-100">
-                    <img src="{{ asset('storage/home_gambar/1.JPG') }}" alt="" class="img-fluid">
+                <div class="vh-100 d-flex align-items-center justify-content-center">
+                    <img src="{{ asset('storage/home/1.JPG') }}" alt="" class="img-fluid">
                     <div class="vh-100 w-100 position-absolute top-0 bg-gradient-reflect"></div>
                 </div>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
+                    <h1 class="fw-bold mb-0">SELAMAT DATANG</h1>
+                    <h2>SLB - B Dharma Asih Pontianak</h2>
                 </div>
             </div>
 

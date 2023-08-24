@@ -8,7 +8,7 @@
             <div
                 style="
     height: 400px;
-    background-image: url('{{ asset('storage/berita_gambar') . '/' . $berita->gambar }}');
+    background-image: url('{{ asset('storage/berita') . '/' . $berita->gambar }}');
     background-size: cover;
     ">
             </div>

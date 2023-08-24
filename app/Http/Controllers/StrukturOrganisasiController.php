@@ -75,9 +75,9 @@ class StrukturOrganisasiController extends Controller
         $validatedData['editor'] = auth()->user()->id;
         if ($request->hasFile('img') && $request->file('img')->isValid()) {
             $extension = $request->file('img')->getClientOriginalExtension();
-            $bgImagePath = $request->file('img')->storeAs('public/stuktur-organisasi_gambar', uniqid() . '.' . $extension);
+            $bgImagePath = $request->file('img')->storeAs('public/stuktur-organisasi', uniqid() . '.' . $extension);
             $bgImageFileName = basename($bgImagePath);
-            $validatedData['img'] = 'stuktur-organisasi_gambar/' . $bgImageFileName;
+            $validatedData['img'] = 'stuktur-organisasi/' . $bgImageFileName;
         }
         StrukturOrganisasi::first()->update($validatedData);
         return back()->with('success', 'Struktur organisasi berhasil diubah');

@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'role' => 1,
             'username' => 'admin',
             'email' => 'admin@slbbdharmaasih.sch.id',
-            'picture' => 'profil_gambar/dummy.png',
+            'picture' => 'profil/dummy.png',
             'password' => bcrypt('admin')
         ]);
 
@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
                 'role' => random_int(2, 3),
                 'username' => strtolower($username . $number),
                 'email' => strtolower($username . $number) . '@gmail.com',
-                'picture' => 'profil_gambar/dummy.png',
+                'picture' => 'profil/dummy.png',
                 'nimp' => fake()->numerify('################'),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             ]);
@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
                     'role' => random_int(2, 3),
                     'username' => strtolower($fname . $lname . $number),
                     'email' => strtolower($fname . $lname . $number) . '@gmail.com',
-                    'picture' => 'profil_gambar/dummy.png',
+                    'picture' => 'profil/dummy.png',
                     'nimp' => fake()->numerify('################'),
                     'kelas_id' => $i,
                     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
@@ -181,7 +181,7 @@ class DatabaseSeeder extends Seeder
             \App\Models\Ekskuls::create([
                 'name' => fake()->word(),
                 'desc' => fake()->sentence(2),
-                'img' => 'ekskul_gambar/dummy.png',
+                'img' => 'dummy.png',
                 'editor' => 1,
             ]);
         }
@@ -190,44 +190,42 @@ class DatabaseSeeder extends Seeder
             \App\Models\Sarpras::create([
                 'name' => fake()->word(),
                 'desc' => fake()->sentence(2),
-                'img' => 'sarana-prasarana_gambar/dummy.png',
+                'img' => 'dummy.png',
                 'editor' => 1,
             ]);
         }
         for ($i = 0; $i < 20; $i++) {
-            $juara = random_int(1, 3);
             \App\Models\Prestasi::create([
-                'name' => 'Juara ' . $juara . ' ' . substr(fake()->sentence(4), 0, -1),
-                'rank' => $juara,
-                'desc' => substr(fake()->sentence(4), 0, -1),
+                'name' => 'Lomba '.substr(fake()->sentence(3), 0, -1),
+                'rank' => fake()->randomElement([1,2,3,'Harapan','Best Social Impact']),
                 'year' => fake()->year(),
-                'type' => random_int(1, 2),
+                'type' => fake()->randomElement(['Prestasi Siswa','Prestasi Guru']),
                 'editor' => 1,
             ]);
         }
 
         \App\Models\Sejarah::create([
             'title' => 'Sejarah SLB - B Dharma Asih',
-            'img' => 'sejarah_gambar/dummy.png',
+            'img' => 'dummy.png',
             'body' => 'ini body sejarah',
             'editor' => 1,
         ]);
 
         \App\Models\VisiMisi::create([
-            'img' => 'visi-misi_gambar/dummy.png',
+            'img' => 'dummy.png',
             'visi' => 'ubah visi disini',
             'misi' => 'ubah visi disini',
             'editor' => 1,
         ]);
         \App\Models\StrukturOrganisasi::create([
-            'img' => 'struktur-organisasi_gambar/struktur-organisasi.png',
+            'img' => 'struktur-organisasi/struktur-organisasi.png',
             'editor' => 1,
         ]);
         for ($i = 0; $i < 15; $i++) {
             \App\Models\Galeri::create([
                 'title' => fake()->words(5,true),
                 'desc' => fake()->sentence(10),
-                'img' => 'galeri/dummy.png',
+                'img' => 'dummy.png',
                 'editor' => 1,
             ]);
         }

@@ -46,9 +46,9 @@ class TenagaPengajarController extends Controller
         ]);
 
         $extension = $request->file('picture')->getClientOriginalExtension();
-        $bgImagePath = $request->file('picture')->storeAs('public/tenaga-pengajar_gambar', uniqid() . '.' . $extension);
+        $bgImagePath = $request->file('picture')->storeAs('public/tenaga-pengajar', uniqid() . '.' . $extension);
         $bgImageFileName = basename($bgImagePath);
-        $validatedData['picture'] = 'tenaga-pengajar_gambar/' . $bgImageFileName;
+        $validatedData['picture'] = 'tenaga-pengajar/' . $bgImageFileName;
 
 
         $validatedData['password'] = bcrypt($request->password);
@@ -98,9 +98,9 @@ class TenagaPengajarController extends Controller
 
         if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
             $extension = $request->file('picture')->getClientOriginalExtension();
-            $bgImagePath = $request->file('picture')->storeAs('public/tenaga-pengajar_gambar', uniqid() . '.' . $extension);
+            $bgImagePath = $request->file('picture')->storeAs('public/tenaga-pengajar', uniqid() . '.' . $extension);
             $bgImageFileName = basename($bgImagePath);
-            $validatedData['picture'] = 'tenaga-pengajar_gambar/' . $bgImageFileName;
+            $validatedData['picture'] = 'tenaga-pengajar/' . $bgImageFileName;
         }
 
         // Hanya perbarui password jika diisi

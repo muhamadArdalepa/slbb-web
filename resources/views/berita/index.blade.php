@@ -47,7 +47,7 @@
                                     <div class="">
                             @endif
                                         <h5 class="card-title">{{ $b->title }}</h5>
-                                        <p class="card-text">{{ $b->excerp }}. . .</p>
+                                        <p class="card-text">{{ $b->excerp }}...</p>
                                         <p class="card-text">
                                             <small class="text-muted">
                                                 {{ $b->updated_at->diffForHumans() }} | oleh

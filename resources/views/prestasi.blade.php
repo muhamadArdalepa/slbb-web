@@ -16,29 +16,31 @@
             <div class="row mb-5">
                 <div class="col-md-3">
                     <div class="d-flex flex-column trigger-container">
-                        <button id="btnSiswa" class="btn accordion-trigger btn-warning w-100" data-bs-target="#siswa"
+                        <button id="btn0" class="btn accordion-trigger btn-warning w-100" data-bs-target="#accordion0"
                             role="button" aria-expanded="true" aria-controls="siswa">Prestasi Siswa</button>
                         <div class="px-3">
                             <hr class="my-2 px-3">
                         </div>
-                        <button id="btnGuru" class="btn accordion-trigger btn-light bg-white text-muted w-100"
-                            data-bs-toggle="collapse" data-bs-target="#guru" role="button" aria-expanded="true"
+                        <button id="btn1" class="btn accordion-trigger btn-light bg-white text-muted w-100"
+                            data-bs-toggle="collapse" data-bs-target="#accordion1" role="button" aria-expanded="true"
                             aria-controls="guru">Prestasi Guru</button>
                     </div>
                 </div>
                 <div class="col-md-8 offset-md-1">
                     <div id="accordion">
+                        @foreach ($data as $i => $prestasi)
+                            
                         <div class="accordion-item">
-                            <div class="accordion-collapse collapse show" id="siswa" data-toggle="#btnSiswa"
+                            <div class="accordion-collapse collapse {{ $i == 0 ? 'show' : ''}}" id="accordion{{$i}}" data-toggle="#btn{{$i}}"
                                 data-bs-parent="#accordion">
-                                @foreach ($data[0] as $d)
+                                @foreach ($prestasi as $d)
                                     <div class="rounded-4 shadow mb-4">
                                         <div class="p-5 mb-4">
-                                            <div class="d-flex gap-5 align-items-center">
-                                                <img src="/images/juara1.svg" alt=""
-                                                    style="max-height: 150px;max-width: 200px;">
+                                            <div class="d-flex gap-5 align-items-start">
+                                                {!!$d->getImg()!!}
                                                 <div class="">
-                                                    <h3 class="fw-bold">{{ $d->name }}</h3>
+                                                    <h3 class="fw-bold mb-0 lh-1">{{ $d->getRank() }}</h3>
+                                                    <h4 class="">{{ $d->name }}</h3>
                                                     <div>{{ $d->desc }}</div>
                                                     <div class="text-muted">Tahun {{ $d->year }}</div>
                                                 </div>
@@ -48,26 +50,8 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <div class="accordion-collapse collapse" id="guru" data-toggle="#btnGuru"
-                                data-bs-parent="#accordion">
-                                @foreach ($data[1] as $d)
-                                    <div class="rounded-4 shadow mb-4">
-                                        <div class="p-5 mb-4">
-                                            <div class="d-flex gap-5 align-items-center">
-                                                <img src="/images/juara1.svg" alt=""
-                                                    style="max-height: 150px;max-width: 200px;">
-                                                <div class="">
-                                                    <h3 class="fw-bold">{{ $d->name }}</h3>
-                                                    <div>{{ $d->desc }}</div>
-                                                    <div class="text-muted">Tahun {{ $d->year }}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -92,7 +76,7 @@
                 let scrollY = $(window).scrollTop()
                 setTimeout(() => {
                     $('.trigger-container').css('margin-top', scrollY)
-                }, 300);
+                }, 50);
             })
         </script>
     @endpush

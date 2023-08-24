@@ -14,8 +14,8 @@
                                 {{session('success')}}
                             </div>
                         @endif
-                        <form method="post" action="{{ route('update.pages') }}" enctype="multipart/form-data">
-                            @method('POST')
+                        <form method="post" action="{{ route('visi-misi.update',1) }}" enctype="multipart/form-data">
+                            @method('PUT')
                             @csrf
                             <input type="hidden" name="page" value="visi-misi">
                             <div class="form-group mb-3">

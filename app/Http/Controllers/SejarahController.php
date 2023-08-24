@@ -81,9 +81,9 @@ class SejarahController extends Controller
         $validatedData['editor'] = auth()->user()->id;
         if ($request->hasFile('img') && $request->file('img')->isValid()) {
             $extension = $request->file('img')->getClientOriginalExtension();
-            $bgImagePath = $request->file('img')->storeAs('public/sejarah_gambar', uniqid() . '.' . $extension);
+            $bgImagePath = $request->file('img')->storeAs('public/sejarah', uniqid() . '.' . $extension);
             $bgImageFileName = basename($bgImagePath);
-            $validatedData['img'] = 'sejarah_gambar/'.$bgImageFileName;
+            $validatedData['img'] = 'sejarah/'.$bgImageFileName;
         }
         Sejarah::first()->update($validatedData);
         return back()->with('success','Halaman sejarah berhasil diubah');

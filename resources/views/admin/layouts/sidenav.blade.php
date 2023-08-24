@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('admin.' . $nav->route) }}"
+                    <a href="{{env('APP_URL'). '/admin/' . $nav->route }}"
                         class="btn my-1 btn-{{ Route::currentRouteName() == 'admin.' . $nav->route ? 'warning' : 'light' }}  w-100 text-start">
                         {{ $nav->name }}
                     </a>

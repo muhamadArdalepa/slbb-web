@@ -16,10 +16,9 @@ return new class extends Migration
         Schema::create('prestasis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('rank')->nullable();
-            $table->string('desc');
+            $table->string('rank');
             $table->string('year');
-            $table->tinyInteger('type');
+            $table->enum('type',['Prestasi Siswa','Prestasi Guru']);
             $table->foreignId('editor')
                 ->constrained('users', 'id')
                 ->onDelete('restrict')
