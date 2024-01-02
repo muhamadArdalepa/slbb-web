@@ -21,24 +21,7 @@ class UpdatePages extends Controller
                 
                 break;
             case 'visi-misi':
-                $validatedData = $request->validate([
-                    'visi' => 'required',
-                    'misi' => 'required',
-                    'img' => 'nullable|image|mimes:jpeg,png,jpg',
-                ],[
-                    'visi.required' => 'Visi Wajib diisi',
-                    'misi.required' => 'Misi Wajib diisi',
-                    'body.required' => 'Body Wajib diisi',
-                ]);
-                $validatedData['editor'] = auth()->user()->id;
-                if ($request->hasFile('img') && $request->file('img')->isValid()) {
-                    $extension = $request->file('img')->getClientOriginalExtension();
-                    $bgImagePath = $request->file('img')->storeAs('public/visi-misi', uniqid() . '.' . $extension);
-                    $bgImageFileName = basename($bgImagePath);
-                    $validatedData['img'] = 'visi-misi/'.$bgImageFileName;
-                }
-                VisiMisi::first()->update($validatedData);
-                return back()->with('success','Halaman visi dan misi berhasil diubah');
+                
                 break;
 
             default:
